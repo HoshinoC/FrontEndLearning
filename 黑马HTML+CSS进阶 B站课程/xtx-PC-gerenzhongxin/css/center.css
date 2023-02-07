@@ -1,0 +1,687 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: #333;
+    font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+}
+
+ul, h1, h3, h4, p, dl, dd {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+i {
+    font-style: normal;
+}
+
+input {
+    outline: none;
+    padding: 0;
+    border: none;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+ul {
+    list-style: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.wrapper {
+    width: 1240px;
+    margin: 0 auto;
+}
+
+.sprites {
+    background-image: url(../images/sprites.png);
+    background-size: 400px 400px;
+    background-repeat: no-repeat;
+}
+
+/** 顶部导航 **/
+.xtx_topnav {
+    background-color: #333;
+}
+
+.xtx_topnav .xtx_navs {
+    height: 53px;
+    text-align: right;
+    line-height: 53px;
+    font-size: 0;
+}
+
+.xtx_topnav .xtx_navs li {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.xtx_topnav .xtx_navs li:last-child a {
+    border-right: none;
+}
+
+.xtx_topnav .xtx_navs .mobile {
+    display: inline-block;
+    width: 20px;
+    height: 16px;
+    position: relative;
+    top: 3px;
+    background-position: -160px -70px;
+}
+
+.xtx_topnav .xtx_navs a {
+    display: inline-block;
+    line-height: 1;
+    padding: 0 15px;
+    border-right: 2px solid #666;
+    color: #dcdcdc;
+}
+
+.xtx_topnav .xtx_navs a:hover {
+    color: #5eb69c;
+}
+
+/** 主导航及Logo **/
+.xtx_header {
+    padding: 32px 0 44px;
+}
+
+.xtx_header .xtx_logo {
+    width: 143px;
+    height: 129px;
+    margin-left: 50px;
+    text-indent: -999px;
+    background-image: url(../images/logo.png);
+    background-size: contain;
+    float: left;
+}
+
+.xtx_header .xtx_navs {
+    padding-top: 75px;
+    margin-left: 88px;
+    float: left;
+}
+
+.xtx_header .xtx_navs li {
+    line-height: 1;
+    font-size: 16px;
+    margin-right: 50px;
+    position: relative;
+    float: left;
+}
+
+.xtx_header .xtx_navs li:after {
+    content: '';
+    display: none;
+    width: 30px;
+    height: 2px;
+    background-color: #5eb69c;
+    position: absolute;
+    left: 1px;
+    bottom: -7px;
+}
+
+.xtx_header .xtx_navs li:hover a, .xtx_header .xtx_navs li.active a {
+    color: #5eb69c;
+}
+
+.xtx_header .xtx_navs li:hover:after, .xtx_header .xtx_navs li.active:after {
+    display: block;
+}
+
+.xtx_header .xtx_search {
+    height: 38px;
+    padding-top: 60px;
+    float: right;
+}
+
+.xtx_header .xtx_search_wrapper {
+    width: 175px;
+    height: 38px;
+    padding-left: 39px;
+    border-bottom: 1px solid #e7e7e7;
+    position: relative;
+    float: right;
+}
+
+.xtx_header .xtx_search_wrapper:before {
+    content: '';
+    display: block;
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    background-image: url(../images/sprites.png);
+    background-size: 400px 400px;
+    background-position: -80px -70px;
+}
+
+.xtx_header .xtx_search_wrapper input {
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    color: #999;
+}
+
+.xtx_header .xtx_search_wrapper input::-webkit-input-placeholder {
+    color: #ccc;
+}
+
+.xtx_header .xtx_search_cart {
+    display: block;
+    width: 22px;
+    height: 22px;
+    position: relative;
+    margin: 8px 12px 0 12px;
+    float: right;
+    background-position: -120px -70px;
+}
+
+.xtx_header .xtx_search_cart i {
+    position: absolute;
+    top: -5px;
+    left: 16px;
+    line-height: 1;
+    padding: 1px 6px;
+    font-style: normal;
+    font-size: 13px;
+    background-color: #ea745e;
+    border-radius: 15px;
+    color: #fff;
+}
+
+/** 中间主体内容 **/
+.xtx_body{
+    padding: 30px 0;
+    background-color: #f6f6f6;
+}
+
+.xtx_body .wrapper{
+    display: flex;
+}
+/*侧边栏*/
+.xtx_body .aside{
+    margin-right: 18px;
+    width: 227px;
+    /*最小高度500，可以超过500*/
+    min-height: 500px;
+    background-color: white;
+}
+/*侧边栏：头像部分*/
+.xtx_body .aside .user_presentation{
+    padding: 47px 0 32px 0;
+    border-bottom: 1px solid #f4f4f4
+}
+
+.xtx_body .aside .profile_photo{
+    margin: 0 71px 0 71px;
+    width: 85px;
+    height: 85px;
+}
+
+.xtx_body .aside .user_name{
+    margin: 12px 0;
+    text-align: center;
+    font-size: 18px;
+    font-family: PingFangSC-Medium, sans-serif;
+    color: #333333;
+}
+
+.xtx_body .aside .vip{
+    margin: 0 67px 0 67px;
+    text-align: center;
+    width: 93px;
+    height: 26px;
+    background-image: linear-gradient(264deg,
+    #e05e2f 0%,
+    #ea745e 95%);
+    background-blend-mode: normal, normal;
+    border-radius: 13px;
+}
+
+.xtx_body .aside .vip img{
+    width: 15px;
+}
+
+.xtx_body .aside .vip span{
+    /*实现img和span对齐*/
+    vertical-align:middle;
+    font-family: PingFangSC-Regular sans-serif;
+    font-size: 14px;
+    color: #f9f9f9;
+}
+
+/*侧边栏：我的账户*/
+.xtx_body .aside .nav{
+    padding: 30px 0;
+    border-bottom: 1px solid #f4f4f4
+}
+
+.xtx_body .aside .nav h3{
+    margin: 0 0 30px 52px;
+    font-size: 18px;
+    font-weight: normal;
+    font-family: PingFangSC-Regular sans-serif;
+    color: #333333;
+}
+
+/*实现导航标签的小圆点：通过伪元素来实现*/
+.xtx_body .aside .nav li>a::before{
+    content: "";
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #5eb69c;
+    vertical-align: middle;
+    margin-right: 10px;
+    opacity: 0;
+}
+
+.xtx_body .aside .nav li{
+    margin-left: 37px;
+    padding-bottom: 30px;
+}
+
+.xtx_body .aside .nav li:last-child{
+    padding-bottom: 0;
+}
+/*这个地方目前比较奇怪
+想要实现的效果是，悬停在a上出现小圆点，小圆点本身不占a的大小
+但是现在实现的效果是小圆点本身就是a的一部分，这样会造成a的点选范围变大
+无法实现想要效果的原因是，a:hover无法选中父级或者上面的::before兄弟*/
+.xtx_body .aside .nav li:hover a {
+    color: #5cb99e;
+}
+
+.xtx_body .aside .nav li:hover ::before{
+     opacity: 1;
+}
+
+/*侧边栏：交易管理 复用nav类*/
+/*侧边栏：我的收藏 复用nav类*/
+/*侧边栏：帮助中心 复用nav类*/
+
+/*主体内容*/
+.xtx_body .main{
+    flex: 1;
+    background-color: pink;
+}
+
+.xtx_body .main .overview{
+    display: flex;
+    padding: 20px 0;
+    height: 132px;
+    background-color: white;
+    margin-bottom: 18px;
+}
+/*主体内容：用户账户概览*/
+.xtx_body .main .overview div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /*两个div平分一个flex父空间(overview)*/
+    flex: 1;
+}
+
+.xtx_body .main .overview div:first-child{
+    border-right: 1px solid #f4f4f4;
+}
+
+.xtx_body .main .overview a{
+    text-align: center;
+}
+
+.xtx_body .main .overview a p{
+    font-family: PingFangSC-Regular sans-serif;
+    font-size: 16px;
+    color: #333333;
+}
+
+.xtx_body .main .overview a img{
+    margin-bottom: 10px;
+    height: 23px;
+}
+
+.xtx_body .main .overview a span{
+    font-family: PingFangSC-Semibold sans-serif;
+    font-size: 23px;
+    color: #e05e30;
+}
+
+/*主体内容：我的订单*/
+/*pannel实现一些布局格式复用*/
+.main .pannel{
+    margin-bottom: 20px;
+    padding: 25px 19px;
+    background-color: white;
+}
+
+.main .pannel .pannel_header{
+    display: flex;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main .pannel .pannel_header h3{
+    font-family: PingFangSC-Regular, sans-serif;
+    font-weight: normal;
+    font-size: 22px;
+    color: #333333;
+}
+
+.main .pannel .pannel_header a{
+    font-family: PingFangSC-Regular, sans-serif;
+    font-size: 16px;
+    color: #999999;
+}
+/*主体内容：我的订单 具体内容*/
+.main .order .order_product li{
+    border: 1px solid #e8e8e8;
+    margin-bottom: 21px;
+    display: flex;
+    height: 137px;
+}
+
+.main .order .order_product .left{
+    display: flex;
+    align-items: center;
+    flex: 3;
+}
+
+.main .order .order_product .left div:first-child{
+    margin-left: 12px;
+    width: 107px;
+    height: 107px;
+}
+
+.main .order .order_product .left div:first-child img{
+    width: 100%;
+}
+
+.main .order .order_product .left div:nth-child(2){
+    margin-left: 5px;
+}
+
+.main .order .order_product .left div:nth-child(2) p{
+    font-size: 16px;
+    color: #333333;
+}
+
+.main .order .order_product .left div:nth-child(2) span{
+    font-size: 14px;
+    color: #999999;
+}
+
+.main .order .order_product .left div:last-child{
+    margin-left: 125px;
+    width: 60px;
+    text-align: center;
+    font-size: 14px;
+    color: #e05e30;
+}
+
+.main .order .order_product .middle{
+    flex: 1;
+    padding-top: 40px;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;;
+    text-align: center;
+}
+
+.main .order .order_product .middle p:first-child{
+    color: #9a2e1f;
+}
+
+.main .order .order_product .right{
+    flex: 1;
+    padding-top: 29px;
+    text-align: center;
+}
+
+.main .order .order_product .right a:first-child{
+    display: block;
+    margin: 0 auto 13px;
+    border-radius: 2px;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #5eb69c;
+    color: white;
+}
+
+.main .order .order_product .right a:nth-child(n+2){
+    display: block;
+    font-size: 14px;
+}
+
+
+
+/** 公共底部 **/
+.xtx_footer {
+    border-top: 1px solid #e4e4e4;
+}
+
+.xtx_footer .contact {
+    padding: 60px 0 40px 25px;
+}
+
+.xtx_footer .contact dl {
+    height: 190px;
+    text-align: center;
+    padding: 0 72px;
+    border-right: 1px solid #f2f2f2;
+    color: #999;
+    float: left;
+}
+
+.xtx_footer .contact dl:first-child {
+    padding-left: 0;
+}
+
+.xtx_footer .contact dl:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+.xtx_footer .contact dt {
+    line-height: 1;
+    font-size: 18px;
+}
+
+.xtx_footer .contact dd {
+    margin: 36px 12px 0 0;
+    float: left;
+}
+
+.xtx_footer .contact dd:last-child {
+    margin-right: 0;
+}
+
+.xtx_footer .contact .chat, .xtx_footer .contact .feedback, .xtx_footer .contact .weixin, .xtx_footer .contact .weibo {
+    width: 92px;
+    height: 92px;
+    padding-top: 20px;
+    border: 1px solid #ededed;
+}
+
+.xtx_footer .contact .chat:before, .xtx_footer .contact .feedback:before, .xtx_footer .contact .weixin:before, .xtx_footer .contact .weibo:before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 30px;
+    margin: 0 auto 8px;
+    background-image: url(../images/sprites.png);
+    background-size: 400px 400px;
+}
+
+.xtx_footer .contact .chat:before {
+    background-position: -245px -70px;
+}
+
+.xtx_footer .contact .chat:hover:before {
+    background-position: -200px -70px;
+}
+
+.xtx_footer .contact .feedback:before {
+    background-position: -345px -70px;
+}
+
+.xtx_footer .contact .feedback:hover:before {
+    background-position: -295px -70px;
+}
+
+.xtx_footer .contact .weixin:before {
+    background-position: -247px -15px;
+}
+
+.xtx_footer .contact .weixin:hover:before {
+    background-position: -202px -15px;
+}
+
+.xtx_footer .contact .weibo:before {
+    background-position: -347px -15px;
+}
+
+.xtx_footer .contact .weibo:hover:before {
+    background-position: -297px -15px;
+}
+
+.xtx_footer .contact .qrcode {
+    width: 92px;
+    height: 92px;
+    padding: 7px;
+    border: 1px solid #ededed;
+}
+
+.xtx_footer .contact .download {
+    padding-top: 5px;
+    font-size: 14px;
+}
+
+.xtx_footer .contact .download span {
+    display: block;
+}
+
+.xtx_footer .contact .download a {
+    display: block;
+    line-height: 1;
+    padding: 10px 25px;
+    margin-top: 5px;
+    color: #fff;
+    border-radius: 2px;
+    background-color: #5eb69c;
+}
+
+.xtx_footer .contact .hotline {
+    padding-top: 20px;
+    font-size: 22px;
+    color: #666;
+}
+
+.xtx_footer .contact .hotline small {
+    display: block;
+    font-size: 15px;
+    color: #999;
+}
+
+.xtx_footer .extra {
+    background-color: #333;
+}
+
+.xtx_footer .slogan {
+    height: 178px;
+    line-height: 58px;
+    padding: 60px 100px;
+    border-bottom: 1px solid #434343;
+    text-align: justify;
+}
+
+.xtx_footer .slogan:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 0;
+}
+
+.xtx_footer .slogan a {
+    display: inline-block;
+    height: 58px;
+    line-height: 58px;
+    color: #fff;
+    font-size: 28px;
+}
+
+.xtx_footer .slogan a:before {
+    content: '';
+    display: inline-block;
+    width: 58px;
+    height: 58px;
+    margin-right: 10px;
+    float: left;
+    background-image: url(../images/sprites.png);
+    background-size: 400px 400px;
+}
+
+.xtx_footer .slogan .price:before {
+    background-position: 0 0;
+}
+
+.xtx_footer .slogan .express:before {
+    background-position: -65px 0;
+}
+
+.xtx_footer .slogan .quality:before {
+    background-position: -130px 0;
+}
+
+.xtx_footer .copyright {
+    height: 170px;
+    padding-top: 40px;
+    text-align: center;
+    color: #999;
+    font-size: 15px;
+}
+
+.xtx_footer .copyright p {
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.xtx_footer .copyright a {
+    color: #999;
+    line-height: 1;
+    padding: 0 10px 0 6px;
+    border-right: 1px solid #999;
+}
+
+.xtx_footer .copyright a:last-child {
+    border-right: none;
+}
