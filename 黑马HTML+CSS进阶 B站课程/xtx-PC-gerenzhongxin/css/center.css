@@ -429,11 +429,18 @@ ul {
 
 .main .order .order_product .left div:nth-child(2){
     margin-left: 5px;
+    /*实现文字后面的省略号效果*/
+    width: 0;
+    flex: 1;
 }
 
 .main .order .order_product .left div:nth-child(2) p{
     font-size: 16px;
     color: #333333;
+    /*实现文字后面的省略号效果*/
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .main .order .order_product .left div:nth-child(2) span{
@@ -442,8 +449,7 @@ ul {
 }
 
 .main .order .order_product .left div:last-child{
-    margin-left: 125px;
-    width: 60px;
+    width: 178px;
     text-align: center;
     font-size: 14px;
     color: #e05e30;
