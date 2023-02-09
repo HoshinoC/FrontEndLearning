@@ -1,0 +1,146 @@
+@import "base";
+@import "normalize";
+@rootFontSize: 37.5rem;
+
+body{
+  background-color: #F0F0F0;
+}
+
+//主体部分
+.main{
+  //防止被底部功能栏盖住
+  padding-bottom: (50 / @rootFontSize);
+
+  .banner{
+    img{
+      height: (160 / @rootFontSize);
+    }
+  }
+
+  .activity{
+    //总标题
+    h3{
+      margin: (10 / @rootFontSize) 0 (15 / @rootFontSize) (15 / @rootFontSize);
+      font-family: FZLTCHJW--GB1-0,sans-serif;
+      font-size: (14 / @rootFontSize);
+      color: #3C3C3C;
+    }
+    li{
+      margin-bottom: (10 / @rootFontSize)px;
+      background-color: white;
+      .pic{
+        position: relative;
+        height: (160 / @rootFontSize);
+        //活动状态：进行中，已结束 绝对定位
+        .activity_status{
+          position: absolute;
+          left: (15 / @rootFontSize);
+          top: (-4 / @rootFontSize);
+          width: (68 / @rootFontSize);
+          height: (29 / @rootFontSize);
+          text-align: center;
+          font-family: FZLTHJW--GB1-0, sans-serif;
+          font-size: (12 / @rootFontSize);
+          line-height: (29 / @rootFontSize);
+          color: #FFFFFF;
+          background-image: url("../images/status_active.png");
+          background-size: cover;
+        }
+        //活动收藏： 绝对定位
+        .icon-shoucang1{
+          position: absolute;
+          top: (15 / @rootFontSize);
+          right: (18 / @rootFontSize);
+          font-size: (24 / @rootFontSize);
+          color: #FFFFFF;
+        }
+      }
+      &:nth-child(n+2){
+        .pic{
+          .activity_status{
+            background-image: url("../images/status_default.png");
+          }
+        }
+      }
+      a{
+        display: block;
+        padding: (8 / @rootFontSize) (15 / @rootFontSize) (10 / @rootFontSize) (15 / @rootFontSize);
+        .activity_description{
+          display: flex;
+          margin-bottom: (14 / @rootFontSize);
+          div:first-child{
+            flex: 3;
+            font-family: FZLTHJW--GB1-0, sans-serif;
+            font-size: (15 / @rootFontSize);
+            color: #3C3C3C;
+          }
+          div:last-child{
+            flex: 1;
+            text-align: right;
+            font-family: FZLTHJW--GB1-0, sans-serif;
+            font-size: (15 / @rootFontSize);
+            color: #FE6249;
+          }
+        }
+        .activity_details{
+          font-size: (11 / @rootFontSize);
+          color:  #B4B4B4;
+          .iconfont{
+            font-size: (8 / @rootFontSize);
+          }
+          span:nth-child(2n){
+            margin-left: (7 / @rootFontSize);
+          }
+          span:nth-child(3){
+            margin-left: (15 / @rootFontSize);
+          }
+        }
+      }
+    }
+  }
+}
+
+//底部功能栏
+.navbar_bottom{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: (49 / @rootFontSize);
+  background-color: #FECA49;
+
+  ul{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+  }
+
+  li{
+    height: 100%;
+    a{
+      display: block;
+      margin-top: (4 / @rootFontSize);
+      width: (44 / @rootFontSize);
+      text-align: center;
+    }
+    .iconfont{
+      margin: 0 auto;
+      font-size: (21.2 / @rootFontSize);
+      color: #D78B09;
+    }
+    .icon-index-copy{
+      color: #FEFEFE;
+    }
+    p{
+      margin-top: (6.8 / @rootFontSize);
+      font-size: (11 / @rootFontSize);
+      color: #D78B09;
+    }
+    &:first-child p{
+      color: white;
+    }
+  }
+}
+
+
