@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        let val = 0
+        while(true){
+            let selection = +prompt('请选择操作\n'+
+                '\t\t 1.存钱\n ' +
+                '\t\t 2.取钱\n ' +
+                '\t\t 3.查询余额\n ' +
+                '\t\t 4.退出\n ')
+            if(selection === 1){
+                let temp = +prompt('请输入存款金额')
+                val += temp
+                alert('成功')
+            }
+            else if(selection === 2){
+                let temp = +prompt('请输入取款金额')
+                if(temp > val){
+                    alert('余额不足，请重试')
+                }
+                else{
+                    val -= temp
+                    alert('成功')
+                }
+            }
+            else if(selection === 3){
+                alert('当前余额为' + val + '元')
+            }
+            else if(selection === 4){
+                break;
+            }
+        }
+    </script>
+</body>
+</html>
