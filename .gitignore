@@ -1,4 +1,6 @@
 .idea
+bootstrap-3.4.1-dist
 
 *.jpg
 *.png
+*.gif

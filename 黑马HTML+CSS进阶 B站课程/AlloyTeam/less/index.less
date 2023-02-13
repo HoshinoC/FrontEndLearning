@@ -1,0 +1,53 @@
+.carousel{
+  //框架中图片的height为auto，为了使图片随父盒子尺寸的变化而变化，将其层叠为100%
+  //使用!important是图方便
+  img{
+    height: 100% !important;
+  }
+
+  //媒体查询，使轮播图片在不同视口下高度不同
+  @media(max-width: 992px){
+    .item{
+      height: 400px;
+    }
+  }
+  @media(max-width: 768px){
+    .item{
+      height: 250px;
+    }
+  }
+  @media(min-width: 992px){
+    .item{
+      height: 500px;
+    }
+  }
+
+  .carousel-indicators{
+    li{
+      border-radius: 0;
+      width: 20px;
+      height: 5px;
+    }
+  }
+}
+
+.navbar-default{
+  //修改背景颜色变透明
+  background-color: transparent;
+  border: 0;
+}
+
+.project{
+  text-align: center;
+  margin-top: 20px;
+
+  .container{
+    div{
+      a{
+        display: block;
+        height: 200px;
+        background-color: pink;
+      }
+    }
+  }
+}
