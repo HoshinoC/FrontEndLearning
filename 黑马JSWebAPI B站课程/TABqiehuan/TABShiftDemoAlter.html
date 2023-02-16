@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tab栏切换</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab {
+            width: 590px;
+            height: 340px;
+            margin: 20px;
+            border: 1px solid #e4e4e4;
+        }
+
+        .tab-nav {
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tab-nav h3 {
+            font-size: 24px;
+            font-weight: normal;
+            margin-left: 20px;
+        }
+
+        .tab-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .tab-nav ul li {
+            margin: 0 20px;
+            font-size: 14px;
+        }
+
+        .tab-nav ul li a {
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            color: #333;
+        }
+
+        .tab-nav ul li a.active {
+            border-color: #e1251b;
+            color: #e1251b;
+        }
+
+        .tab-content {
+            padding: 0 16px;
+        }
+
+        .tab-content .item {
+            display: none;
+        }
+
+        .tab-content .item.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tab-nav">
+            <h3>每日特价</h3>
+            <ul>
+                <li><a data-id="1" class="active" href="javascript:;">精选</a></li>
+                <li><a data-id="2" href="javascript:;">美食</a></li>
+                <li><a data-id="3" href="javascript:;">百货</a></li>
+                <li><a data-id="4" href="javascript:;">个护</a></li>
+                <li><a data-id="5" href="javascript:;">预告</a></li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="item active"><img src="./images/tab00.png" alt="" /></div>
+            <div class="item"><img src="./images/tab01.png" alt="" /></div>
+            <div class="item"><img src="./images/tab02.png" alt="" /></div>
+            <div class="item"><img src="./images/tab03.png" alt="" /></div>
+            <div class="item"><img src="./images/tab04.png" alt="" /></div>
+        </div>
+    </div>
+
+    <script>
+        // 利用事件委托优化基础代码
+        // 获取ul DOM对象
+        const ul = document.querySelector('.tab-nav, ul')
+        // 给ul绑定事件，注意该事件需要用mouseover，如果用mouseenter是不会冒泡，也就不会触发事件
+        ul.addEventListener('mouseover', function (e){
+            // 确定真实触发事件的子元素
+            if(e.target.tagName === 'A'){
+                document.querySelector('.tab-nav .active').classList.remove('active')
+                e.target.classList.add('active')
+                // 为了修改对应的内容，需要给a添加自定义属性
+                // 获取对应id
+                const index = +(e.target.dataset.id)
+                document.querySelector('.tab-content .active').classList.remove('active')
+                document.querySelector(`.tab-content div:nth-child(${index})`).classList.add('active')
+            }
+        })
+    </script>
+
+</body>
+
+</html>
