@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 500px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+            height: 24px;
+        }
+
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+
+        .allCheck {
+            width: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th class="allCheck">
+                <input type="checkbox" name="" id="checkAll"> <span class="all">全选</span>
+            </th>
+            <th>商品</th>
+            <th>商家</th>
+            <th>价格</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="check" class="ck">
+            </td>
+            <td>小米手机</td>
+            <td>小米</td>
+            <td>￥1999</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="check" class="ck">
+            </td>
+            <td>小米净水器</td>
+            <td>小米</td>
+            <td>￥4999</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="check" class="ck">
+            </td>
+            <td>小米电视</td>
+            <td>小米</td>
+            <td>￥5999</td>
+        </tr>
+    </table>
+
+    <script>
+        // check_count表示当前被选中的子框的个数，初始为0
+        let check_count = 0
+        // 获取全选DOM
+        const all_check = document.querySelector('#checkAll')
+        // 获取子复选框DOM对象List
+        const sub_check = document.querySelectorAll('.ck')
+        // 全选DOM绑定全选/反选事件
+        all_check.addEventListener('click', function (){
+            // update check_count
+            check_count = all_check.checked ? 3 : 0
+            // 全选/反选子复选框
+            for(let i=0; i<sub_check.length; i++){
+                sub_check[i].checked = all_check.checked
+            }
+        })
+        // 每一个子复选框绑定点击事件，从而实现当手动全选子复选框时，全选框同样被选中，反之亦然
+        // for(let i=0; i<sub_check.length; i++){
+        //     sub_check[i].addEventListener('click', function (){
+        //         // 检查点击后的状态，如果变为checked，check_count就要++，如果手动全选==3，全选框选中
+        //         if(this.checked){
+        //             check_count++
+        //             if(check_count === 3){
+        //                 all_check.checked = true
+        //             }
+        //         }
+        //         // 如果点击后不是checked, 全选框去掉选中
+        //         else{
+        //             check_count--
+        //             all_check.checked = false
+        //         }
+        //     })
+        // }
+
+        // 视频做法，更充分利用CSS，更好
+        // 如果复选框被选中，可以用:check这种选择器将其选出来，也就是说，判断选中出来的个数来控制全选框即可
+        for(let i=0; i<sub_check.length; i++){
+            sub_check[i].addEventListener('click', function (){
+                if(document.querySelectorAll('.ck:checked').length === sub_check.length){
+                    all_check.checked = true
+                }
+                else{
+                    all_check.checked = false
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
