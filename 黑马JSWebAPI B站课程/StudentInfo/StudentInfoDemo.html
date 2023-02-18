@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>学生信息管理</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+  <h1>新增学员</h1>
+  <form class="info" autocomplete="off">
+    姓名：<input type="text" class="uname" name="uname" />
+    年龄：<input type="text" class="age" name="age" />
+    性别:
+    <select name="gender" class="gender">
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+    薪资：<input type="text" class="salary" name="salary" />
+    就业城市：<select name="city" class="city">
+      <option value="北京">北京</option>
+      <option value="上海">上海</option>
+      <option value="广州">广州</option>
+      <option value="深圳">深圳</option>
+      <option value="曹县">曹县</option>
+    </select>
+    <button class="add">录入</button>
+  </form>
+
+  <h1>就业榜</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>薪资</th>
+        <th>就业城市</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--
+        <tr>
+          <td>1001</td>
+          <td>欧阳霸天</td>
+          <td>19</td>
+          <td>男</td>
+          <td>15000</td>
+          <td>上海</td>
+          <td>
+            <a href="javascript:">删除</a>
+          </td>
+        </tr>
+        -->
+    </tbody>
+  </table>
+
+  <script>
+    // 数据对象数组
+    let data_arr = []
+
+    // 录入操作
+    // 首先要阻止表单提交的默认行为
+    const info = document.querySelector('.info')
+    info.addEventListener('submit', function (e){
+      e.preventDefault()
+      // 首先应该检查输入框中是否都正确填入文本，否则弹出警示框
+      const uname = document.querySelector('form .uname')
+      const age = document.querySelector('form .age')
+      const salary = document.querySelector('form .salary')
+      if(uname.value === '' || age.value === '' || salary.value === ''){
+        alert('尚有信息未填写完整，请完善')
+        return
+      }
+      // 信息完整，创建新对象，写入数组
+      const gender = document.querySelector('form .gender')
+      const city = document.querySelector('form .city')
+      let obj = {
+        'id': data_arr.length + 1,
+        'uname': uname.value,
+        'age': age.value,
+        'salary': salary.value,
+        'gender': gender.value,
+        'city': city.value
+      }
+      data_arr.push(obj)
+      // 清空表单
+      this.reset()
+      // 渲染页面
+      render()
+    })
+
+    // 删除
+    // 采用事件委托
+    const tbody = document.querySelector('tbody')
+    tbody.addEventListener('click', function (e){
+      // 从数组中移除
+      if(e.target.tagName === 'A'){
+        data_arr.splice(Number(e.target.dataset.id), 1)
+      }
+      render()
+    })
+
+    function render(){
+      // 先清空tbody以前的数据
+      const tbody = document.querySelector('tbody')
+      tbody.innerHTML = ''
+      // const trList = document.querySelectorAll('tbody tr')
+      // for(let i=0; i<trList.length; i++){
+      //   tbody.removeChild(trList[i])
+      // }
+      for(let i=0; i<data_arr.length; i++){
+        const new_tr_info = document.createElement('tr')
+        new_tr_info.innerHTML = `
+            <td>${data_arr[i].id}</td>
+            <td>${data_arr[i].uname}</td>
+            <td>${data_arr[i].age}</td>
+            <td>${data_arr[i].gender}</td>
+            <td>${data_arr[i].salary}</td>
+            <td>${data_arr[i].city}</td>
+            <td>
+            <!--   注意，data-id应该是i，这样才能保证正确删除，而不能是data_arr[i].id         -->
+              <a href="javascript:" data-id="${i}">删除</a>
+            </td>`
+        tbody.appendChild(new_tr_info)
+      }
+    }
+  </script>
+
+</body>
+
+</html>
