@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>学生信息管理</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+<h1>新增学员</h1>
+<form class="info" autocomplete="off">
+  姓名：<input type="text" class="uname" name="uname" />
+  年龄：<input type="text" class="age" name="age" />
+  性别:
+  <select name="gender" class="gender">
+    <option value="男">男</option>
+    <option value="女">女</option>
+  </select>
+  薪资：<input type="text" class="salary" name="salary" />
+  就业城市：<select name="city" class="city">
+  <option value="北京">北京</option>
+  <option value="上海">上海</option>
+  <option value="广州">广州</option>
+  <option value="深圳">深圳</option>
+  <option value="曹县">曹县</option>
+</select>
+  <button class="add">录入</button>
+</form>
+
+<h1>就业榜</h1>
+<table>
+  <thead>
+  <tr>
+    <th>学号</th>
+    <th>姓名</th>
+    <th>年龄</th>
+    <th>性别</th>
+    <th>薪资</th>
+    <th>就业城市</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!--
+    <tr>
+      <td>1001</td>
+      <td>欧阳霸天</td>
+      <td>19</td>
+      <td>男</td>
+      <td>15000</td>
+      <td>上海</td>
+      <td>
+        <a href="javascript:">删除</a>
+      </td>
+    </tr>
+    -->
+  </tbody>
+</table>
+
+<script>
+  // 找到存储到localStorage中的id起始值
+  let data_total = localStorage.getItem('data_total')
+  // 如果为空，说明是第一次打开网页，还没有值，应该存储一个初始值
+  if(data_total === null){
+    localStorage.setItem('data_total', '1')
+    data_total = localStorage.getItem('data_total')
+  }
+  // 渲染方法
+  function render(){
+    // 获取localStorage中全部数据
+    // 倒叙 因为旧数据应该渲染在前，同时不渲染data_total
+    for(let i=0; i < localStorage.length; i++){
+      // 获取其key
+      let key_temp = localStorage.key(i)
+      if(key_temp === 'data_total') continue
+      // 获取对应的内容
+      let obj = JSON.parse(localStorage.getItem(key_temp))
+      // 渲染
+      const new_tr_info = document.createElement('tr')
+      new_tr_info.innerHTML = `
+            <td>${obj.uid}</td>
+            <td>${obj.uname}</td>
+            <td>${obj.age}</td>
+            <td>${obj.gender}</td>
+            <td>${obj.salary}</td>
+            <td>${obj.city}</td>
+            <td>
+            <!--   注意，data-id应该是i，这样才能保证正确删除，而不能是data_arr[i].id         -->
+              <a href="javascript:" data-key="${key_temp}">删除</a>
+            </td>`
+      const tbody = document.querySelector('tbody')
+      tbody.appendChild(new_tr_info)
+    }
+  }
+
+  // 刚打开页面 或 提交表单后 重新渲染
+  render()
+
+  // 录入操作
+  const info = document.querySelector('.info')
+  info.addEventListener('submit', function (e){
+    // 首先应该检查输入框中是否都正确填入文本，否则弹出警示框
+    const unameDOM = document.querySelector('form .uname')
+    const ageDOM = document.querySelector('form .age')
+    const salaryDOM = document.querySelector('form .salary')
+    if(unameDOM.value === '' || ageDOM.value === '' || salaryDOM.value === ''){
+      alert('尚有信息未填写完整，请完善')
+      return
+    }
+    // 信息完整，创建新对象，写入数组
+    const genderDOM = document.querySelector('form .gender')
+    const cityDOM = document.querySelector('form .city')
+    let obj = {
+      uid: Number(data_total),
+      uname: unameDOM.value,
+      age: ageDOM.value,
+      salary: salaryDOM.value,
+      gender: genderDOM.value,
+      city: cityDOM.value
+    }
+    // 存储到localStorage中
+    localStorage.setItem(obj.uid.toString(), JSON.stringify(obj))
+    // id++
+    localStorage.setItem('data_total', (Number(localStorage.getItem('data_total')) + 1).toString())
+  })
+
+  // 删除操作
+  // 采用事件委托
+  const tbody = document.querySelector('tbody')
+  tbody.addEventListener('click', function (e){
+    // 从localStorage中移除
+    if(e.target.tagName === 'A'){
+      localStorage.removeItem(e.target.dataset.key)
+    }
+    location.reload()
+  })
+</script>
+
+</body>
+
+</html>

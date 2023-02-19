@@ -63,6 +63,8 @@
   <script>
     // 数据对象数组
     let data_arr = []
+    // 学号初始值
+    let id_init = 1
 
     // 录入操作
     // 首先要阻止表单提交的默认行为
@@ -81,7 +83,7 @@
       const gender = document.querySelector('form .gender')
       const city = document.querySelector('form .city')
       let obj = {
-        'id': data_arr.length + 1,
+        'id': id_init,
         'uname': uname.value,
         'age': age.value,
         'salary': salary.value,
@@ -89,6 +91,8 @@
         'city': city.value
       }
       data_arr.push(obj)
+      // 学号++
+      id_init++
       // 清空表单
       this.reset()
       // 渲染页面
