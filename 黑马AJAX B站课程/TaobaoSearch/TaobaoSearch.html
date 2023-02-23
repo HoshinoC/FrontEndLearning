@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+        }
+        img{
+            width: 100%;
+        }
+        .logo{
+            margin: 50px auto;
+            width: 300px;
+        }
+
+        .search{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search input{
+            padding-left: 5px;
+            /*添加outline 这样输入时边框颜色可以保持不变而不会变成黑色*/
+            outline: none;
+            border: 2px solid orangered;
+            width: 700px;
+            height: 50px;
+            font-size: 20px;
+        }
+        .search a{
+            display: block;
+            padding: 13px 0;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            text-decoration: none;
+            background-color: orangered;
+            color: white;
+        }
+
+        .suggest{
+            display: none;
+            margin-left: 536px;
+            border: 1px solid black;
+            border-top: 0;
+            background-color: white;
+            width: 700px;
+        }
+
+        .suggest li{
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="images/logo.jpg" alt="">
+    </div>
+    <div class="search">
+        <input type="text" placeholder="请输入商品名称">
+        <a href="#">搜 索</a>
+    </div>
+    <div class="suggest">
+        <ul>
+<!--            <li>111</li>-->
+        </ul>
+    </div>
+
+    <script>
+        // 防止抖动。设置一个定时器
+        let timerId = 0
+        // 监听文本框输入事件
+        const search_text = document.querySelector('.search input')
+        search_text.addEventListener('keyup', function (){
+            // 首先清空定时器，如果上次事件的延迟时间还没结束，清空后可以重新计时，上一次的请求就不会发送
+            clearTimeout(timerId)
+            // 启动定时器，经过一个延迟后才执行事件处理
+            timerId = setTimeout(function (){
+                // 如果为空，则要设置下方搜索提示栏不可见，并且将ul里的内容清空
+                if(search_text.value.length <= 0){
+                    const list = document.querySelector('.suggest ul')
+                    list.parentNode.style.display = 'none'
+                    list.innerHTML = ''
+                    return
+                }
+                // 如果不为空，要去获取搜索建议列表
+                jsonp('https://suggest.taobao.com/sug', search_text.value, 'success')
+            }, 500)
+        })
+
+        // 不使用jquery,使用原生js实现JSONP
+        function jsonp(url, params, callback){
+            // 创建一个script标签
+            let script = document.createElement('script')
+            // 填写对应的src
+            script.src = `${url}?q=${params}&callback=${callback}`
+            // 添加到body中，并执行回调函数success
+            document.documentElement.appendChild(script)
+            // 处理完后，再移除这个新添加的script
+            document.documentElement.removeChild(script)
+        }
+
+        // 获取搜索建议列表回调函数，在该回调函数中，得到传回来的值，并渲染
+        function success(data){
+            // console.log(data.result[0][0])
+            // 获取列表DOM
+            const list = document.querySelector('.suggest ul')
+            // 先清空
+            list.innerHTML = ''
+            // 设置下方搜索提示栏可见
+            list.parentNode.style.display = 'block'
+            // 添加从服务器传回来的值
+            for(let i=0; i<data.result.length; i++){
+                list.innerHTML += `<li>
+                    ${data.result[i][0]}
+                </li>`
+            }
+        }
+
+    </script>
+<!--    <script src="https://suggest.taobao.com/sug?q=apple&callback=success"></script>-->
+</body>
+</html>
