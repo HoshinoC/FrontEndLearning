@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="button" value="点我发送请求">
+
+    <script>
+        const btn = document.querySelector('input')
+        // 接受一个配置对象作为参数
+        /*
+        method:请求类型
+        url:请求的URL地址
+        data:请求携带的数据
+        success:请求成功后的回调函数
+         */
+        // GET对象例子
+        let temp_configuration_get = {
+            method: 'GET',
+            url: 'http://www.liulongbin.top:3006/api/getbooks',
+            data: {},
+            success: function(res){
+                console.log(res)
+            }
+        }
+        // POST对象例子
+        let temp_configuration_post = {
+            method: 'POST',
+            url: 'http://www.liulongbin.top:3006/api/addbook',
+            data: {bookname: '哈利波特', author:'施耐庵', publisher:'北京图书出版社'},
+            success: function(res){
+                console.log(res)
+            }
+        }
+        btn.addEventListener('click', function (){
+            simpleAjax(temp_configuration_post)
+        })
+    </script>
+    <script src="simpleAjax.js"></script>
+</body>
+</html>
