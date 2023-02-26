@@ -1,5 +1,6 @@
 .idea
 bootstrap-3.4.1-dist
+node_modules
 
 *.jpg
 *.png
