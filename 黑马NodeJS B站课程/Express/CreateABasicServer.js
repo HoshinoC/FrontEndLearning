@@ -32,3 +32,20 @@ app.get('/user', (req, res) => {
 app.post('/user', (req, res) => {
     res.send('Connect successfully')
 })
+
+
+// 监听客户端对/的GET请求
+app.get('/', (res, req) => {
+    // 通过req.query可以获取到客户端发送过来的查询参数(URL中?以后部分)
+    // 默认req.query是一个空对象
+    res.send(req.query)
+})
+
+// 监听客户端对/user/:id的GET请求
+/* :params表示这一部分是URL的动态部分
+例子:现在客户端请求的地址是/user/1，那么该动态部分意思就是id = 1
+ */
+app.get('user/:id', (res, req) => {
+    // 获取客户端请求的URL的动态部分
+    res.send(res.params)
+})
