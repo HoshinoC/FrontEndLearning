@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="button" value="提交JSONP跨域">
+    <script>
+        const btn = document.querySelector('input')
+        btn.addEventListener('click', function (){
+            jsonp('http://127.0.0.1/api/jsonp', 'success')
+        })
+
+        // 不使用jquery,使用原生js实现JSONP
+        function jsonp(url, callback){
+            // 创建一个script标签
+            let script = document.createElement('script')
+            // 填写对应的src
+            script.src = `${url}?callback=${callback}`
+            // 添加到body中，对服务器接口进行请求，并执行回调函数success
+            document.documentElement.appendChild(script)
+            // 处理完后，再移除这个新添加的script
+            document.documentElement.removeChild(script)
+        }
+
+        // 回调函数打印服务器传过来的数据对象
+        function success(data){
+            console.log(data)
+        }
+    </script>
+</body>
+</html>
